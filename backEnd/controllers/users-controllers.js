@@ -11,7 +11,7 @@ const createUser = async (req, res, next) => {
         return next(new HttpError('Invalid inputs, please check your info.', 422));
     }
 
-    const { userFirstName, email, password } = req.body;
+    const { userFirstName, email, password, projects } = req.body;
 
     try {
         const existingUser = await User.findOne({ email });
@@ -23,7 +23,8 @@ const createUser = async (req, res, next) => {
         const newUser = new User({
             userFirstName,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            projects
         });
 
         await newUser.save();

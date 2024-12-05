@@ -9,7 +9,7 @@ const createUser = async (req, res, next) => {
         return next(new HttpError('Invalid inputs, please check your info.', 422));
     }
 
-    const { userFirstName, email, password } = req.body; // Match the frontend fields
+    const { userFirstName, email, password, projects } = req.body; // Match the frontend fields
 
     try {
         // Check if the email already exists
@@ -22,7 +22,8 @@ const createUser = async (req, res, next) => {
         const newUser = new User({
             userFirstName,
             email,
-            password
+            password,
+            projects
         });
 
         await newUser.save();
