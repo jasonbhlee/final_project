@@ -14,6 +14,12 @@ function ProjectsPage() {
     alert(`You signed up for Project ${project}`);
   };
 
+  // Handle deleting a project
+  const handleDelete = (project) => {
+    setSignedUpProjects(signedUpProjects.filter(p => p !== project));
+    alert(`You have removed Project ${project}`);
+  };
+
   return (
     <div>
       {/* Navbar */}
@@ -48,7 +54,10 @@ function ProjectsPage() {
         {signedUpProjects.length > 0 ? (
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {signedUpProjects.map((project) => (
-              <li key={project}>Project {project}</li>
+              <li key={project}>
+                Project {project}
+                <button onClick={() => handleDelete(project)} style={{ marginLeft: '10px' }}>Delete</button>
+              </li>
             ))}
           </ul>
         ) : (
