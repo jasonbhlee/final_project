@@ -19,6 +19,7 @@ function HomePage() {
         <Link to="/projects">
           <button>Go to Projects</button>
         </Link>
+        <p>Welcome user</p>
       </div>
     </div>
   );
