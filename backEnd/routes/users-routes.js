@@ -14,5 +14,14 @@ router.post(
     usersControllers.createUser
 );
 
-// Export the router so that it can be used in other files
+// Route to login a user
+router.post(
+    '/login',
+    [
+      check('email').isEmail().withMessage('Invalid email format.'),
+      check('password').exists().withMessage('Password is required.')
+    ],
+    usersControllers.loginUser
+);
+
 module.exports = router;

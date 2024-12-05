@@ -21,7 +21,8 @@ app.use((error, req, res, next) => {
     return next(error);
   }
 
-  res.status(error.code || 500); // Default to 500 if no specific error code
+// Default to 500 if no specific error code
+  res.status(error.code || 500); 
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
