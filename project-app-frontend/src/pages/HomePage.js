@@ -26,3 +26,4 @@ function HomePage() {
 }
 // hompage export
 export default HomePage;
+//comment example 2
