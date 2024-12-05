@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color:rgb(101, 122, 214);
+  color: white;
 }
 
 code {
@@ -13,3 +14,15 @@ code {
     monospace;
 }
 
+button {
+  background-color: rgb(112, 89, 246);
+  border: none;
+  padding: 5px;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
