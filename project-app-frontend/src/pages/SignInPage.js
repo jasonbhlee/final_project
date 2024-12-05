@@ -62,7 +62,7 @@ function SignInPage() {
         <button type="submit">Sign In</button>
       </form>
       <p>
-        Don't have an account? <Link to="/register" style={{ textDecoration: 'none' }}>Register</Link>
+        Don't have an account? <Link to="/register" style={{ display: 'inline-block', textDecoration: 'none' }}>Register</Link>
       </p>
     </div>
   );
