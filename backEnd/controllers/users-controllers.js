@@ -1,60 +1,74 @@
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
-
 
 // Create a new user (Registration)
 const createUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors.array());
-      return next(new HttpError('Invalid inputs, please check your info.', 422));
+        console.log(errors.array());
+        return next(new HttpError('Invalid inputs, please check your info.', 422));
     }
 
     const { userFirstName, email, password } = req.body;
 
     try {
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return next(new HttpError('User already exists with this email.', 422));
-      }
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return next(new HttpError('User already exists with this email.', 422));
+        }
+// Storing hashed password
+        const hashedPassword = await bcrypt.hash(password, 12);
+        const newUser = new User({
+            userFirstName,
+            email,
+            password: hashedPassword
+        });
 
-      const newUser = new User({
-        userFirstName,
-        email,
-        password  // Store password as plaintext
-      });
+        await newUser.save();
 
-      await newUser.save();
+        const responseUser = newUser.toObject({ getters: true });
+        delete responseUser.password;
 
-      const responseUser = newUser.toObject({ getters: true });
-      delete responseUser._id;
-      delete responseUser.__v;
-      delete responseUser.password;
-
-      res.status(201).json({ user: responseUser });
+        res.status(201).json({ user: responseUser });
     } catch (err) {
-      const error = new HttpError('Creating user failed, please try again later.', 500);
-      return next(error);
+        const error = new HttpError('Creating user failed, please try again later.', 500);
+        return next(error);
     }
 };
 
-exports.createUser = createUser;
+// User Login
+const loginUser = async (req, res, next) => {
+    const { email, password } = req.body;
 
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return next(new HttpError('User not found.', 404));
+        }
 
-//FOR ALL OTHER REQUESTS, ADD BELOW:
+        const isValidPassword = await bcrypt.compare(password, user.password);
+        if (!isValidPassword) {
+            return next(new HttpError('Invalid password.', 403));
+        }
+
+        res.json({ message: 'Logged in!', userId: user.id, email: user.email });
+    } catch (err) {
+        return next(new HttpError('Login failed, please try again later.', 500));
+    }
+};
 
 // Get all users
 const getAllUsers = async (req, res, next) => {
     try {
         const users = await User.find({}, '-password -__v -_id');
-        res.json({ users: users.map(user => user.toObject()) });
+        res.json({ users: users.map(user => user.toObject({ getters: true })) });
     } catch (err) {
-        const error = new HttpError('Fetching users failed, please try again later', 500);
+        const error = new HttpError('Fetching users failed, please try again later.', 500);
         return next(error);
     }
 };
-
 
 // Get users by first name
 const getUsersByFirstName = async (req, res, next) => {
@@ -62,7 +76,7 @@ const getUsersByFirstName = async (req, res, next) => {
 
     try {
         const users = await User.find({ userFirstName }, 'userFirstName userLastName email userId -_id');
-        
+
         if (!users || users.length === 0) {
             return next(new HttpError("Could not find users with the given first name.", 404));
         }
@@ -73,7 +87,6 @@ const getUsersByFirstName = async (req, res, next) => {
         return next(error);
     }
 };
-
 
 // Get users by last name
 const getUsersByLastName = async (req, res, next) => {
@@ -188,12 +201,12 @@ const deleteUser = async (req, res, next) => {
     }
 };
 
-
-exports.getAllUsers = getAllUsers
-exports.getUsersByFirstName = getUsersByFirstName
-exports.getUsersByLastName = getUsersByLastName
-exports.getUserByEmail = getUserByEmail
-exports.getUsersByUserId = getUsersByUserId
-exports.createUser = createUser
-exports.updateUser = updateUser
-exports.deleteUser = deleteUser
+exports.createUser = createUser;
+exports.loginUser = loginUser;
+exports.getAllUsers = getAllUsers;
+exports.getUsersByFirstName = getUsersByFirstName;
+exports.getUsersByLastName = getUsersByLastName;
+exports.getUserByEmail = getUserByEmail;
+exports.getUsersByUserId = getUsersByUserId;
+exports.updateUser = updateUser;
+exports.deleteUser = deleteUser;

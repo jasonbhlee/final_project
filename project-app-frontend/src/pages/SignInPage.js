@@ -1,20 +1,40 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function SignInPage() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const history = useHistory();
 
-  // Handle input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle form submission
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Sign-In Data:', formData);
-    alert('Sign-in form submitted');
+    try {
+      const response = await fetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Sign-in failed');
+      }
+
+      history.push('/home');
+    } catch (error) {
+      console.error('Error during sign-in:', error);
+      alert('Sign-in failed: ' + error.message);
+    }
   };
 
   return (
