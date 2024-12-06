@@ -9,6 +9,7 @@ body {
   color: white;
   font-size: 22px;
   align-items: center;
+  padding: 0px;
 }
 
 code {
@@ -29,4 +30,18 @@ button:hover {
   cursor: pointer;
   background-color: white;
   color: black;
+}
+
+nav {
+  margin: 0px;
+}
+
+#root {
+  margin: 0px;
+  padding: 0;
+}
+
+#root div {
+  margin-top: 0px;
+  padding: 0;
 }
