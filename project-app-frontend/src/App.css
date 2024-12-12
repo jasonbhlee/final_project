@@ -192,4 +192,8 @@ button {
   display: inline-block;
 }
 
+.buttonStyle {
+  background-color: #22a1a1;
+}
+
 

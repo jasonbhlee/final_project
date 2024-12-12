@@ -18,7 +18,7 @@ code {
 }
 
 button {
-  background-color: #450f9b;
+  background-color: #22a1a1;
   border: none;
   padding: 10px;
   color: whitesmoke;
@@ -48,4 +48,8 @@ nav {
 #root div {
   margin-top: 0px;
   padding: 0;
+}
+
+.buttonStyle {
+  background-color: #22a1a1;
 }
