@@ -3,7 +3,6 @@ const { check } = require('express-validator');
 const usersControllers = require('../controllers/users-controllers');
 const router = express.Router();
 
-// Route to create a new user with updated validation
 router.post(
     '/',
     [
@@ -14,7 +13,6 @@ router.post(
     usersControllers.createUser
 );
 
-// Route to login a user
 router.post(
     '/login',
     [

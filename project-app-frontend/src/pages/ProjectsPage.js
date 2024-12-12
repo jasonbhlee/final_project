@@ -7,7 +7,7 @@ function ProjectsPage() {
   const [signedUpProjects, setSignedUpProjects] = useState([]);
   const userEmail = localStorage.getItem('userEmail');
 
-  // Fetch signed-up projects on component load
+  
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -27,7 +27,7 @@ function ProjectsPage() {
     fetchProjects();
   }, [userEmail]);
 
-  // Handle signing up for a project
+ 
   const handleSignUp = async (project) => {
     if (signedUpProjects.includes(project)) {
       alert(`You are already signed up for Project ${project}`);
@@ -54,7 +54,7 @@ function ProjectsPage() {
     }
   };
 
-  // Handle deleting a project
+ 
   const handleDelete = async (project) => {
     const updatedProjects = signedUpProjects.filter((p) => p !== project);
 
@@ -85,7 +85,6 @@ function ProjectsPage() {
         </h1>
       </header>
 
-      {/* Navbar */}
       <nav className="navbar">
         <ul>
           <li><Link to="/home">Homepage</Link></li>

@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color:#58794d;
-  color: white;
+  color: whitesmoke;
   font-size: 22px;
   align-items: center;
   padding: 0px;
@@ -21,15 +21,15 @@ button {
   background-color: #4ABFBD;
   border: none;
   padding: 10px;
-  color: white;
+  color: whitesmoke;
   border-radius: 12px;
   margin: 2px;
 }
 
 button:hover {
   cursor: pointer;
-  background-color: white;
-  color: black;
+  background-color: whitesmoke;
+  color: rgb(172, 126, 27);
 }
 
 nav {

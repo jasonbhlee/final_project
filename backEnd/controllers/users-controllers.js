@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
-// Create a new user (Registration)
+// registration - creating new users
 const createUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -39,7 +39,7 @@ const createUser = async (req, res, next) => {
     }
 };
 
-// Update user projects
+// updating user projects
 const updateProjects = async (req, res, next) => {
     const { email, projects } = req.body;
   
@@ -62,7 +62,7 @@ const updateProjects = async (req, res, next) => {
   };
   
 
-  // Fetch user projects
+  // fetching user projects
 const getProjects = async (req, res, next) => {
     const { email } = req.query;
   
@@ -79,7 +79,7 @@ const getProjects = async (req, res, next) => {
   };
   
 
-// User Login
+// login users
 const loginUser = async (req, res, next) => {
     const { email, password } = req.body;
 
@@ -99,24 +99,23 @@ const loginUser = async (req, res, next) => {
         return next(new HttpError('Login failed, please try again later.', 500));
     }
 };
-// Delete users
+// deleting users
 const deleteUser = async (req, res, next) => {
     const { email, password } = req.body;
   
     try {
-      // Find the user by email
+      // finding user by email
       const user = await User.findOne({ email });
       if (!user) {
         return res.status(404).json({ message: 'User not found.' });
       }
   
-      // Verify the password
+      // verifying password
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
         return res.status(401).json({ message: 'Invalid password.' });
       }
   
-      // Delete the user
       await user.deleteOne();
       res.status(200).json({ message: 'User deleted successfully.' });
     } catch (err) {
@@ -128,7 +127,6 @@ const deleteUser = async (req, res, next) => {
 
 // --------------------------------------------------------------------- Unused Requests --------------------------------------------------------------------------------------------------------
 
-// Get all users
 const getAllUsers = async (req, res, next) => {
     try {
         const users = await User.find({}, '-password -__v -_id');
@@ -139,7 +137,6 @@ const getAllUsers = async (req, res, next) => {
     }
 };
 
-// Get users by first name
 const getUsersByFirstName = async (req, res, next) => {
     const userFirstName = req.params.userFirstName;
 
@@ -157,7 +154,6 @@ const getUsersByFirstName = async (req, res, next) => {
     }
 };
 
-// Get users by last name
 const getUsersByLastName = async (req, res, next) => {
     const userLastName = req.params.userLastName;
 
@@ -177,7 +173,6 @@ const getUsersByLastName = async (req, res, next) => {
 };
 
 
-// Get a user by email
 const getUserByEmail = async (req, res, next) => {
     const email = req.params.email;
 
@@ -196,8 +191,6 @@ const getUserByEmail = async (req, res, next) => {
 };
 
 
-
-// Get user by Id
 const getUsersByUserId = async (req, res, next) => {
     const userId = req.params.userId;
 
@@ -216,8 +209,6 @@ const getUsersByUserId = async (req, res, next) => {
     res.json({ user });
 };
 
-
-// Update user info
 const updateUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

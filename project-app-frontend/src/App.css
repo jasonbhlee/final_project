@@ -37,13 +37,12 @@
   }
 }
 
-/* Existing styles in app.css */
 .App {
   text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: vmin;
   pointer-events: none;
 }
 
@@ -77,7 +76,6 @@
   }
 }
 
-/* Navbar Styles */
 .navbar {
   background-color: #22a1a1  ;
   padding: 10px;
@@ -85,7 +83,6 @@
   width: 100%;
 }
 
-/* Navigation Links */
 .navbar ul {
   margin: 0;
   padding: 0;
@@ -99,19 +96,18 @@
 }
 
 .navbar a {
-  color: #fff;
+  color: whitesmoke;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 .navbar a:hover {
-  color: #000;
+  color: rgb(56, 56, 56);
 }
 
-/* Background for SignInPage */
 .signin-page {
-  background-image: url('../public/wheat_field.jpg');
+  background-image: url('../public/telephone.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -121,10 +117,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #000;
+  color: whitesmoke;
 }
 
-/* Background styling for homepage */
 .homepage {
   background-image: url('../public/paperbag.jpg'); 
   background-size: cover;
@@ -138,48 +133,42 @@
   text-align: center;
 }
 
-/* Background styling for projects page */
 .projects-page {
-  background-image: url('../public/shredder.png'); /* Path to your image */
+  background-image: url('../public/shredder.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh; /* Ensure it covers the full viewport height */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align content at the top */
+  justify-content: flex-start; 
   align-items: center;
   text-align: center;
 }
 
-/* Background styling for register page */
 .register-page {
-  background-image: url('../public/cloud.jpeg'); /* Path to your image */
+  background-image: url('../public/cloud.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh; /* Ensures it covers the full viewport height */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align content at the top */
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
 }
 
-
-
-/* Logo */
 .logo {
   height: 100px;
-  margin-bottom: 10px;
+  margin-bottom: -30px;
 }
 
-/* Input group styling */
 .input-group {
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
-  width: 300px; /* Adjust as necessary */
+  width: 300px;
 }
 
 .input-group label {
@@ -191,28 +180,26 @@
   padding: 8px;
   font-size: 16px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid whitesmoke;
   width: 100%;
 }
 
-/* Button styles */
 .button-primary {
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
-  background-color: #3e27c2;
-  color: #fff;
+  background-color: #450f9b;
+  color: whitesmoke;
   border: none;
   cursor: pointer;
-  width: 300px; /* Match input width */
+  width: 300px;
   margin-top: 10px;
 }
 
 .button-primary:hover {
-  background-color: #5a4ab5;
+  background-color: #450f9b;
 }
 
-/* Link styles */
 .link-primary {
   color: #6a5acd;
   text-decoration: none;
@@ -222,5 +209,8 @@
   text-decoration: underline;
 }
 
+button {
+  display: inline-block;
+}
 
 

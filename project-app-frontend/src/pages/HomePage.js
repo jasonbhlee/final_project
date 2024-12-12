@@ -13,7 +13,6 @@ function HomePage() {
         </h1>
       </header>
 
-      {/* Navbar */}
       <nav className="navbar">
         <ul>
           <li><Link to="/home">Homepage</Link></li>
