@@ -16,3 +16,9 @@
 - the Registration page is working (sign in page isnt)
 
 - to bypass the sign in to view the other pages, just use /home in the URL bar.
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Only Chinbo and Jason really did any work on the acctual code.
+Chris made a few edits initially, but it was usually unusable.
+Steven did a little css and worked on the powerpoint with yusuf.
