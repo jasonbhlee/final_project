@@ -133,8 +133,6 @@ function SignInPage() {
               padding: '10px',
               fontSize: '16px',
               borderRadius: '5px',
-              backgroundColor: '#6a5acd',
-              color: '#fff',
               border: 'none',
               cursor: 'pointer',
             }}
@@ -144,6 +142,7 @@ function SignInPage() {
 
           {/* delete user account button */}
           <button
+            className='delete'
             type="button"
             onClick={handleDeleteAccount}
             style={{
@@ -151,8 +150,6 @@ function SignInPage() {
               padding: '10px',
               fontSize: '16px',
               borderRadius: '5px',
-              backgroundColor: 'red',
-              color: 'white',
               border: 'none',
               cursor: 'pointer',
             }}

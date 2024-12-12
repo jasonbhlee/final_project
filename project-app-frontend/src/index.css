@@ -18,7 +18,7 @@ code {
 }
 
 button {
-  background-color: #4ABFBD;
+  background-color: #450f9b;
   border: none;
   padding: 10px;
   color: whitesmoke;
@@ -30,6 +30,10 @@ button:hover {
   cursor: pointer;
   background-color: whitesmoke;
   color: rgb(172, 126, 27);
+}
+
+.delete {
+  background-color: red;
 }
 
 nav {
