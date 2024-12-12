@@ -5,13 +5,16 @@ import '../App.css';
 
 function SignInPage() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  // allows navigation between pages
   const history = useHistory();
 
+  // this handles input field changes
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // this handles the form submission for signing in
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -20,6 +23,7 @@ function SignInPage() {
         headers: {
           'Content-Type': 'application/json',
         },
+        // this sends email and password to the backend
         body: JSON.stringify({
           email: formData.email,
           password: formData.password,
@@ -40,6 +44,7 @@ function SignInPage() {
     }
   };
 
+  // this deletes user accounts 
   const handleDeleteAccount = async () => {
     if (!window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       return;
@@ -51,6 +56,7 @@ function SignInPage() {
         headers: {
           'Content-Type': 'application/json',
         },
+        // include email and password for authentication
         body: JSON.stringify({
           email: formData.email,
           password: formData.password,
@@ -63,6 +69,7 @@ function SignInPage() {
         throw new Error(result.message || 'Account deletion failed');
       }
 
+      // this will clear local storage, notify the user and redirect back to the sign-in page.
       localStorage.removeItem('userEmail');
       alert('Account deleted successfully.');
       history.push('/');
@@ -73,6 +80,7 @@ function SignInPage() {
 
   return (
     <div className="signin-page" style={{ textAlign: 'center' }}>
+      {/* inline - header section */}
       <header>
         <h1>
           <img src={logo} alt="Logo" style={{ height: '100px', marginRight: '20px' }} />
@@ -115,6 +123,8 @@ function SignInPage() {
             }}
           />
         </div>
+
+        {/* sign-in button */}
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '15px' }}>
           <button
             type="submit"
@@ -131,6 +141,8 @@ function SignInPage() {
           >
             Sign In
           </button>
+
+          {/* delete user account button */}
           <button
             type="button"
             onClick={handleDeleteAccount}

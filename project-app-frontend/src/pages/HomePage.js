@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../logo.png';
 import '../App.css';
 
+// page header with log and title
 function HomePage() {
   return (
     <div className="homepage">
@@ -13,6 +14,7 @@ function HomePage() {
         </h1>
       </header>
 
+      {/* Navbar */}
       <nav className="navbar">
         <ul>
           <li><Link to="/home">Homepage</Link></li>

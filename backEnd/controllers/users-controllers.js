@@ -62,12 +62,12 @@ const updateProjects = async (req, res, next) => {
   };
   
 
-  // fetching user projects
+  // fetching user projects list
 const getProjects = async (req, res, next) => {
     const { email } = req.query;
   
     try {
-      const user = await User.findOne({ email }, 'projects'); // Fetch only the projects field
+      const user = await User.findOne({ email }, 'projects');
       if (!user) {
         return next(new HttpError('User not found.', 404));
       }
@@ -79,7 +79,7 @@ const getProjects = async (req, res, next) => {
   };
   
 
-// login users
+// login users with their credentials
 const loginUser = async (req, res, next) => {
     const { email, password } = req.body;
 

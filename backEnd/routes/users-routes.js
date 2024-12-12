@@ -3,6 +3,7 @@ const { check } = require('express-validator');
 const usersControllers = require('../controllers/users-controllers');
 const router = express.Router();
 
+// this handles registration with validation for name, email, and password
 router.post(
     '/',
     [
@@ -13,6 +14,7 @@ router.post(
     usersControllers.createUser
 );
 
+// this handles user login with validation for email and password
 router.post(
     '/login',
     [
@@ -22,13 +24,14 @@ router.post(
     usersControllers.loginUser
 );
 
+// update user projects when selected or deleted
 router.patch('/projects', usersControllers.updateProjects);
 
+// fetches user projects upon their selection through the session
 router.get('/projects', usersControllers.getProjects);
 
+// deletes user based on email and password
 router.delete('/delete', usersControllers.deleteUser);
 
-
-
-
+// exports the router to be used in the  main app
 module.exports = router;

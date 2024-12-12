@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import logo from '../logo.png';
 import '../App.css';
 
+
 function ProjectsPage() {
+  // this tracks projects the user has signed up for
   const [signedUpProjects, setSignedUpProjects] = useState([]);
+  // this retrieves user email from local storage
   const userEmail = localStorage.getItem('userEmail');
 
-  
+  // this fetches projects the user has selected when the component loads
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -27,13 +30,14 @@ function ProjectsPage() {
     fetchProjects();
   }, [userEmail]);
 
- 
+ // this handles the logic to sign up for a project
   const handleSignUp = async (project) => {
     if (signedUpProjects.includes(project)) {
       alert(`You are already signed up for Project ${project}`);
       return;
     }
 
+    //this add the project and updates the list
     const updatedProjects = [...signedUpProjects, project];
 
     try {
@@ -54,7 +58,7 @@ function ProjectsPage() {
     }
   };
 
- 
+ // this handles the logic to remove a selected project.
   const handleDelete = async (project) => {
     const updatedProjects = signedUpProjects.filter((p) => p !== project);
 
@@ -93,11 +97,12 @@ function ProjectsPage() {
         </ul>
       </nav>
 
-      {/* Projects Page Content */}
+      {/* inline - Projects Page Content */}
       <div style={{ textAlign: 'center', marginTop: '50px' }}>
         <h2>Projects</h2>
         <p>Select a project to sign up for:</p>
-
+        
+        {/* inline - buttons to sign up for new projects */}
         <div style={{ marginBottom: '20px' }}>
           <button onClick={() => handleSignUp('A')} style={{ padding: '10px 20px', marginRight: '10px' }}>
             Sign Up for Project A
@@ -107,6 +112,7 @@ function ProjectsPage() {
           </button>
         </div>
 
+        {/* displays the list of signed-up prjects */}
         <h3>Your Signed-Up Projects:</h3>
         {signedUpProjects.length > 0 ? (
           <ul style={{ listStyle: 'none', padding: 0 }}>

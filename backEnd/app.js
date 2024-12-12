@@ -4,29 +4,29 @@ const mongoose = require("mongoose");
 const usersRoutes = require('./routes/users-routes');
 const app = express();
 
-// Middleware to parse incoming JSON data
+// parses  incoming JSON data for the app
 app.use(bodyParser.json());
 
-// Route to check if the API is running
+// tests the route to see if the server is running
 app.get('/', (req, res) => {
     res.json({ message: "API is running" });
 });
 
-// Register user-related routes
+// handles user-related routes
 app.use("/api/users", usersRoutes);
 
-// Error handling middleware
+// handles erros that occur in the app
 app.use((error, req, res, next) => {
   if (res.headerSent) {
     return next(error);
   }
 
-// Default to 500 if no specific error code
+// sets default error status to 500 if not provided
   res.status(error.code || 500); 
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
-// Connect to MongoDB
+// connects to MongoDB and starts the server
 mongoose
   .connect(
     "mongodb+srv://kaimou:DKxtnxky9wqGpjaF@cluster0.oo1ir.mongodb.net/user?retryWrites=true&w=majority"

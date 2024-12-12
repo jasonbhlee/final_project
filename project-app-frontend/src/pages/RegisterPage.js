@@ -3,12 +3,14 @@ import { Link, useHistory } from 'react-router-dom';
 import logo from '../logo.png';
 import '../App.css';
 
+// this tracks the input of user's name, email, password and allows navigation to other routes.
 function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
 
+  // this handles form submission for registration
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -19,6 +21,7 @@ function RegisterPage() {
     };
 
     try {
+      // this sends user registration data to the backend
       const response = await fetch('/api/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -32,6 +35,7 @@ function RegisterPage() {
       }
 
       alert('Registration successful!');
+      // this redirects to the sign-in page
       history.push('/');
     } catch (error) {
       alert('Registration failed: ' + error.message);
@@ -60,7 +64,7 @@ function RegisterPage() {
           width: '100%',
         }}
       >
-        {/* Input fields */}
+        {/* inline - input fields */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <label style={{ marginBottom: '5px' }}>Name:</label>
@@ -78,6 +82,8 @@ function RegisterPage() {
               }}
             />
           </div>
+
+          {/* email input */}
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <label style={{ marginBottom: '5px' }}>Email:</label>
             <input
@@ -94,6 +100,8 @@ function RegisterPage() {
               }}
             />
           </div>
+
+          {/* password */}
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <label style={{ marginBottom: '5px' }}>Password:</label>
             <input
@@ -111,7 +119,7 @@ function RegisterPage() {
             />
           </div>
 
-          {/* Register button */}
+          {/* submit button */}
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <button
               type="submit"
