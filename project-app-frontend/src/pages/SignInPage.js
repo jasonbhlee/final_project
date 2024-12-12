@@ -59,22 +59,28 @@ function SignInPage() {
         }),
       });
   
-      // Check if the response is valid JSON
-      const result = await response.json().catch(() => null);
+      const result = await response.json();
   
       if (!response.ok) {
         throw new Error(result?.message || 'Account deletion failed');
       }
   
-      // Clear localStorage and navigate back to sign-in or landing page
+      // Clear user session data
       localStorage.removeItem('userEmail');
+  
+      // Clear the form fields
+      setFormData({ email: '', password: '' });
+  
+      // Redirect to the sign-in page
       alert('Account deleted successfully.');
-      history.push('/sign-in');
+      history.push('/'); // Redirect to sign-in page (adjust route as needed)
     } catch (error) {
       console.error('Error during account deletion:', error);
       alert('Account deletion failed: ' + error.message);
     }
   };
+   
+  
   
 
   return (

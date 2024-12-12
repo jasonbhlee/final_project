@@ -101,7 +101,7 @@ const loginUser = async (req, res, next) => {
 };
 // Delete users
 const deleteUser = async (req, res, next) => {
-    const { email, password } = req.body; // Extract email and password from the request body
+    const { email, password } = req.body;
   
     try {
       // Find the user by email
@@ -111,7 +111,7 @@ const deleteUser = async (req, res, next) => {
       }
   
       // Verify the password
-      const isPasswordValid = await user.comparePassword(password); // Assumes a comparePassword method is defined on the User model
+      const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
         return res.status(401).json({ message: 'Invalid password.' });
       }

@@ -28,6 +28,9 @@ router.patch('/projects', usersControllers.updateProjects);
 
 router.get('/projects', usersControllers.getProjects);
 
+router.delete('/delete', usersControllers.deleteUser);
+
+
 
 
 module.exports = router;
