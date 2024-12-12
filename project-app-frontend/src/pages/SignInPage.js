@@ -20,8 +20,8 @@ function SignInPage() {
         },
         body: JSON.stringify({
           email: formData.email,
-          password: formData.password
-        })
+          password: formData.password,
+        }),
       });
 
       const result = await response.json();
@@ -32,7 +32,7 @@ function SignInPage() {
 
       // Store the email in localStorage to persist user session data
       localStorage.setItem('userEmail', formData.email);
-      
+
       // Navigate to the home page after successful sign-in
       history.push('/home');
     } catch (error) {
@@ -41,11 +41,45 @@ function SignInPage() {
     }
   };
 
+  //script to trigger delete request when button is clicked
+  const handleDeleteAccount = async () => {
+    if (!window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+      return;
+    }
+  
+    try {
+      const response = await fetch('/api/users/delete', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password, // Include password for authentication
+        }),
+      });
+  
+      // Check if the response is valid JSON
+      const result = await response.json().catch(() => null);
+  
+      if (!response.ok) {
+        throw new Error(result?.message || 'Account deletion failed');
+      }
+  
+      // Clear localStorage and navigate back to sign-in or landing page
+      localStorage.removeItem('userEmail');
+      alert('Account deleted successfully.');
+      history.push('/sign-in');
+    } catch (error) {
+      console.error('Error during account deletion:', error);
+      alert('Account deletion failed: ' + error.message);
+    }
+  };
+  
+
   return (
     <div style={{ textAlign: 'center' }}>
-      {/* Navbar */}
-      <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff', height: '74px' }}>
-      </nav>
+      <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff', height: '74px' }}></nav>
 
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit} style={{ display: 'inline-block', textAlign: 'left' }}>
@@ -68,10 +102,16 @@ function SignInPage() {
           style={{ display: 'block', marginBottom: '10px' }}
         />
         <button type="submit">Sign In</button>
-        <button type="button" onclick="deleteAccount()">Delete Account</button>
+        
+        <button type="button" onClick={handleDeleteAccount} style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}>
+          Delete Account
+        </button>
       </form>
       <p>
-        Don't have an account? <Link to="/register" style={{ display: 'inline-block', textDecoration: 'none' }}>Register</Link>
+        Don't have an account?{' '}
+        <Link to="/register" style={{ display: 'inline-block', textDecoration: 'none' }}>
+          Register
+        </Link>
       </p>
     </div>
   );

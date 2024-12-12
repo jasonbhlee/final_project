@@ -101,21 +101,32 @@ const loginUser = async (req, res, next) => {
 };
 // Delete users
 const deleteUser = async (req, res, next) => {
-    const userId = req.params.userId;
+    const { email, password } = req.body; // Extract email and password from the request body
+  
     try {
-        const user = await User.findOneAndDelete({ userId });
-        if (!user) {
-            const error = new HttpError('Could not find the user to delete.', 404);
-            return next(error);
-        }
-        res.status(200).json({ message: "Deleted user." });
+      // Find the user by email
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({ message: 'User not found.' });
+      }
+  
+      // Verify the password
+      const isPasswordValid = await user.comparePassword(password); // Assumes a comparePassword method is defined on the User model
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: 'Invalid password.' });
+      }
+  
+      // Delete the user
+      await user.deleteOne();
+      res.status(200).json({ message: 'User deleted successfully.' });
     } catch (err) {
-        const error = new HttpError('Deleting user failed, please try again later.', 500);
-        return next(error);
+      console.error(err);
+      res.status(500).json({ message: 'Deleting user failed, please try again later.' });
     }
-};
+  };
+  
 
-
+// --------------------------------------------------------------------- Unused Requests --------------------------------------------------------------------------------------------------------
 
 // Get all users
 const getAllUsers = async (req, res, next) => {
