@@ -42,7 +42,9 @@ function RegisterPage() {
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    
+    <div style={{ textAlign: 'center'}}>
+      <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff', height: '74px' }}></nav>
       <h2>Register</h2>
       <form onSubmit={handleSubmit} style={{ textAlign: 'left', display: 'inline-block' }}>
         <div style={{ marginBottom: '10px' }}>

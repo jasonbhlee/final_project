@@ -79,7 +79,13 @@ function SignInPage() {
 
   return (
     <div style={{ textAlign: 'center' }}>
+      
       <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff', height: '74px' }}></nav>
+
+
+
+
+
 
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit} style={{ display: 'inline-block', textAlign: 'left' }}>

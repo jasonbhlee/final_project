@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import logo from '../logo.png'; 
 function ProjectsPage() {
   const [signedUpProjects, setSignedUpProjects] = useState([]);
   const userEmail = localStorage.getItem('userEmail'); // Get email from localStorage
@@ -76,6 +76,12 @@ function ProjectsPage() {
 
   return (
     <div>
+      <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+              <h1>
+                <img
+          src={logo}
+          alt="Logo"
+          style={{ height: '50px', marginRight: '20px' }}/>Example here</h1></header>
       {/* Navbar */}
       <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff' }}>
         <ul style={{ listStyle: 'none', display: 'flex', justifyContent: 'space-around', padding: 0 }}>
