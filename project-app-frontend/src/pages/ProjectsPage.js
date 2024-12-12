@@ -1,23 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function ProjectsPage() {
   const [signedUpProjects, setSignedUpProjects] = useState([]);
+  const userEmail = localStorage.getItem('userEmail'); // Get email from localStorage
+
+  // Fetch signed-up projects on component load
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`/api/users/projects?email=${userEmail}`);
+        const data = await response.json();
+
+        if (response.ok) {
+          setSignedUpProjects(data.projects || []); // Set state with fetched projects
+        } else {
+          console.error('Failed to fetch projects');
+        }
+      } catch (err) {
+        console.error('Error fetching projects:', err);
+      }
+    };
+
+    fetchProjects();
+  }, [userEmail]);
 
   // Handle signing up for a project
-  const handleSignUp = (project) => {
+  const handleSignUp = async (project) => {
     if (signedUpProjects.includes(project)) {
       alert(`You are already signed up for Project ${project}`);
       return;
     }
-    setSignedUpProjects([...signedUpProjects, project]);
-    alert(`You signed up for Project ${project}`);
+
+    const updatedProjects = [...signedUpProjects, project];
+
+    try {
+      const response = await fetch('/api/users/projects', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: userEmail, projects: updatedProjects }),
+      });
+
+      if (response.ok) {
+        setSignedUpProjects(updatedProjects); // Update frontend state
+        alert(`You signed up for Project ${project}`);
+      } else {
+        console.error('Failed to sign up for project');
+      }
+    } catch (err) {
+      console.error('Error signing up for project:', err);
+    }
   };
 
   // Handle deleting a project
-  const handleDelete = (project) => {
-    setSignedUpProjects(signedUpProjects.filter(p => p !== project));
-    alert(`You have removed Project ${project}`);
+  const handleDelete = async (project) => {
+    const updatedProjects = signedUpProjects.filter((p) => p !== project);
+
+    try {
+      const response = await fetch('/api/users/projects', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: userEmail, projects: updatedProjects }),
+      });
+
+      if (response.ok) {
+        setSignedUpProjects(updatedProjects); // Update frontend state
+        alert(`You have removed Project ${project}`);
+      } else {
+        console.error('Failed to remove project');
+      }
+    } catch (err) {
+      console.error('Error removing project:', err);
+    }
   };
 
   return (
@@ -36,16 +90,10 @@ function ProjectsPage() {
         <p>Select a project to sign up for:</p>
 
         <div style={{ marginBottom: '20px' }}>
-          <button
-            onClick={() => handleSignUp('A')}
-            style={{ padding: '10px 20px', marginRight: '10px' }}
-          >
+          <button onClick={() => handleSignUp('A')} style={{ padding: '10px 20px', marginRight: '10px' }}>
             Sign Up for Project A
           </button>
-          <button
-            onClick={() => handleSignUp('B')}
-            style={{ padding: '10px 20px' }}
-          >
+          <button onClick={() => handleSignUp('B')} style={{ padding: '10px 20px' }}>
             Sign Up for Project B
           </button>
         </div>

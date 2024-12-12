@@ -18,14 +18,14 @@ const createUser = async (req, res, next) => {
         if (existingUser) {
             return next(new HttpError('User already exists with this email.', 422));
         }
-// Storing hashed password
+
         const hashedPassword = await bcrypt.hash(password, 12);
         const newUser = new User({
             userFirstName,
-            email: String, unique: true,
+            email,
             password: hashedPassword,
-            projects
-        });
+            projects: projects || [],
+          });
 
         await newUser.save();
 
@@ -38,6 +38,46 @@ const createUser = async (req, res, next) => {
         return next(error);
     }
 };
+
+// Update user projects
+const updateProjects = async (req, res, next) => {
+    const { email, projects } = req.body;
+  
+    try {
+      const user = await User.findOneAndUpdate(
+        { email },
+        { projects },
+        { new: true }
+      );
+  
+      if (!user) {
+        return next(new HttpError('User not found.', 404));
+      }
+  
+      res.status(200).json({ projects: user.projects });
+    } catch (err) {
+      const error = new HttpError('Updating projects failed, please try again later.', 500);
+      return next(error);
+    }
+  };
+  
+
+  // Fetch user projects
+const getProjects = async (req, res, next) => {
+    const { email } = req.query;
+  
+    try {
+      const user = await User.findOne({ email }, 'projects'); // Fetch only the projects field
+      if (!user) {
+        return next(new HttpError('User not found.', 404));
+      }
+      res.json({ projects: user.projects });
+    } catch (err) {
+      const error = new HttpError('Fetching projects failed, please try again later.', 500);
+      return next(error);
+    }
+  };
+  
 
 // User Login
 const loginUser = async (req, res, next) => {
@@ -54,7 +94,7 @@ const loginUser = async (req, res, next) => {
             return next(new HttpError('Invalid password.', 403));
         }
 
-        res.json({ message: 'Logged in!', userId: user.id, email: user.email });
+        res.json({ message: 'Logged in!', userId: user.id, email: user.email, projects: user.projects });
     } catch (err) {
         return next(new HttpError('Login failed, please try again later.', 500));
     }
@@ -211,3 +251,5 @@ exports.getUserByEmail = getUserByEmail;
 exports.getUsersByUserId = getUsersByUserId;
 exports.updateUser = updateUser;
 exports.deleteUser = deleteUser;
+exports.updateProjects = updateProjects;
+exports.getProjects = getProjects;

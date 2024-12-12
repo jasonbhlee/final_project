@@ -30,6 +30,10 @@ function SignInPage() {
         throw new Error(result.message || 'Sign-in failed');
       }
 
+      // Store the email in localStorage to persist user session data
+      localStorage.setItem('userEmail', formData.email);
+      
+      // Navigate to the home page after successful sign-in
       history.push('/home');
     } catch (error) {
       console.error('Error during sign-in:', error);
@@ -38,11 +42,10 @@ function SignInPage() {
   };
 
   return (
-    <div style={{ textAlign: 'center'}}>{/* Navbar */}
-    <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff', height: '74px' }}>
-    </nav>
-      
-
+    <div style={{ textAlign: 'center' }}>
+      {/* Navbar */}
+      <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff', height: '74px' }}>
+      </nav>
 
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit} style={{ display: 'inline-block', textAlign: 'left' }}>

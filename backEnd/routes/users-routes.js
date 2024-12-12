@@ -24,4 +24,10 @@ router.post(
     usersControllers.loginUser
 );
 
+router.patch('/projects', usersControllers.updateProjects);
+
+router.get('/projects', usersControllers.getProjects);
+
+
+
 module.exports = router;
