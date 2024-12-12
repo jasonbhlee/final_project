@@ -68,6 +68,7 @@ function SignInPage() {
           style={{ display: 'block', marginBottom: '10px' }}
         />
         <button type="submit">Sign In</button>
+        <button type="button" onclick="deleteAccount()">Delete Account</button>
       </form>
       <p>
         Don't have an account? <Link to="/register" style={{ display: 'inline-block', textDecoration: 'none' }}>Register</Link>

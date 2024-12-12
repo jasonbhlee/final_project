@@ -79,8 +79,9 @@ function ProjectsPage() {
       {/* Navbar */}
       <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff' }}>
         <ul style={{ listStyle: 'none', display: 'flex', justifyContent: 'space-around', padding: 0 }}>
-          <li><Link to="/" style={{ color: '#fff' }}>Sign Out</Link></li>
+          <li><Link to="/home" style={{ color: '#fff' }}>Homepage</Link></li>
           <li><Link to="/projects" style={{ color: '#fff' }}>Projects</Link></li>
+          <li><Link to="/" style={{ color: '#fff' }}>Sign Out</Link></li>
         </ul>
       </nav>
 

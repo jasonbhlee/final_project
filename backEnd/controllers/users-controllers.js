@@ -99,6 +99,23 @@ const loginUser = async (req, res, next) => {
         return next(new HttpError('Login failed, please try again later.', 500));
     }
 };
+// Delete users
+const deleteUser = async (req, res, next) => {
+    const userId = req.params.userId;
+    try {
+        const user = await User.findOneAndDelete({ userId });
+        if (!user) {
+            const error = new HttpError('Could not find the user to delete.', 404);
+            return next(error);
+        }
+        res.status(200).json({ message: "Deleted user." });
+    } catch (err) {
+        const error = new HttpError('Deleting user failed, please try again later.', 500);
+        return next(error);
+    }
+};
+
+
 
 // Get all users
 const getAllUsers = async (req, res, next) => {
@@ -226,21 +243,7 @@ const updateUser = async (req, res, next) => {
 };
 
 
-// Delete users
-const deleteUser = async (req, res, next) => {
-    const userId = req.params.userId;
-    try {
-        const user = await User.findOneAndDelete({ userId });
-        if (!user) {
-            const error = new HttpError('Could not find the user to delete.', 404);
-            return next(error);
-        }
-        res.status(200).json({ message: "Deleted user." });
-    } catch (err) {
-        const error = new HttpError('Deleting user failed, please try again later.', 500);
-        return next(error);
-    }
-};
+
 
 exports.createUser = createUser;
 exports.loginUser = loginUser;
