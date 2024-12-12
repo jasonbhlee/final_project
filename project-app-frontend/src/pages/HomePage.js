@@ -1,22 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../logo.png'; 
+import logo from '../logo.png';
+import '../App.css';
+
 function HomePage() {
   return (
-    <div>
+    <div className="homepage">
       <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
         <h1>
-          <img
-    src={logo}
-    alt="Logo"
-    style={{ height: '50px', marginRight: '20px' }}/>Example here</h1></header>
+          <img src={logo} alt="Logo" style={{ height: '50px', marginRight: '20px' }} />
+          loooong wknd
+        </h1>
+      </header>
+
       {/* Navbar */}
-      <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff' }}>
-      
-        <ul style={{ listStyle: 'none', display: 'flex', justifyContent: 'space-around', padding: 0 }}>
-          <li><Link to="/home" style={{ color: '#fff' }}>Homepage</Link></li>
-                    <li><Link to="/projects" style={{ color: '#fff' }}>Projects</Link></li>
-                    <li><Link to="/" style={{ color: '#fff' }}>Sign Out</Link></li>
+      <nav className="navbar">
+        <ul>
+          <li><Link to="/home">Homepage</Link></li>
+          <li><Link to="/projects">Projects</Link></li>
+          <li><Link to="/">Sign Out</Link></li>
         </ul>
       </nav>
 
@@ -32,6 +34,5 @@ function HomePage() {
     </div>
   );
 }
-// hompage export
+
 export default HomePage;
-//comment example 2

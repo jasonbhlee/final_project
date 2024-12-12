@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../logo.png'; 
+import logo from '../logo.png';
+import '../App.css';
+
 function ProjectsPage() {
   const [signedUpProjects, setSignedUpProjects] = useState([]);
-  const userEmail = localStorage.getItem('userEmail'); // Get email from localStorage
+  const userEmail = localStorage.getItem('userEmail');
 
   // Fetch signed-up projects on component load
   useEffect(() => {
@@ -13,7 +15,7 @@ function ProjectsPage() {
         const data = await response.json();
 
         if (response.ok) {
-          setSignedUpProjects(data.projects || []); // Set state with fetched projects
+          setSignedUpProjects(data.projects || []);
         } else {
           console.error('Failed to fetch projects');
         }
@@ -42,7 +44,7 @@ function ProjectsPage() {
       });
 
       if (response.ok) {
-        setSignedUpProjects(updatedProjects); // Update frontend state
+        setSignedUpProjects(updatedProjects);
         alert(`You signed up for Project ${project}`);
       } else {
         console.error('Failed to sign up for project');
@@ -64,7 +66,7 @@ function ProjectsPage() {
       });
 
       if (response.ok) {
-        setSignedUpProjects(updatedProjects); // Update frontend state
+        setSignedUpProjects(updatedProjects);
         alert(`You have removed Project ${project}`);
       } else {
         console.error('Failed to remove project');
@@ -75,19 +77,20 @@ function ProjectsPage() {
   };
 
   return (
-    <div>
+    <div className="projects-page">
       <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-              <h1>
-                <img
-          src={logo}
-          alt="Logo"
-          style={{ height: '50px', marginRight: '20px' }}/>Example here</h1></header>
+        <h1>
+          <img src={logo} alt="Logo" style={{ height: '50px', marginRight: '20px' }} />
+          loooong wknd
+        </h1>
+      </header>
+
       {/* Navbar */}
-      <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff' }}>
-        <ul style={{ listStyle: 'none', display: 'flex', justifyContent: 'space-around', padding: 0 }}>
-          <li><Link to="/home" style={{ color: '#fff' }}>Homepage</Link></li>
-          <li><Link to="/projects" style={{ color: '#fff' }}>Projects</Link></li>
-          <li><Link to="/" style={{ color: '#fff' }}>Sign Out</Link></li>
+      <nav className="navbar">
+        <ul>
+          <li><Link to="/home">Homepage</Link></li>
+          <li><Link to="/projects">Projects</Link></li>
+          <li><Link to="/">Sign Out</Link></li>
         </ul>
       </nav>
 

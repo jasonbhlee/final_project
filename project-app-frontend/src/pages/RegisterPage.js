@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import logo from '../logo.png';
+import '../App.css';
 
 function RegisterPage() {
-  // State to store the form data
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
 
-  // Function to handle form submission
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault();
 
-    // Create a user object to send to the backend
     const user = {
       userFirstName: name,
       email: email,
@@ -20,7 +19,6 @@ function RegisterPage() {
     };
 
     try {
-      // Send the user data to the backend
       const response = await fetch('/api/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -33,51 +31,111 @@ function RegisterPage() {
         throw new Error(result.message || 'Registration failed');
       }
 
-      // Show a success message and redirect to the Sign-In page
       alert('Registration successful!');
-      history.push('/'); // Redirect to Sign-In
+      history.push('/');
     } catch (error) {
-      alert('Registration failed: ' + error.message); // Show error message
+      alert('Registration failed: ' + error.message);
     }
   };
 
   return (
-    
-    <div style={{ textAlign: 'center'}}>
-      <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff', height: '74px' }}></nav>
+    <div className="register-page">
+      {/* Navbar with no content */}
+      <nav className="navbar"></nav>
+
+      <header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+        <h1>
+          <img src={logo} alt="Logo" style={{ height: '100px', marginRight: '20px' }} />
+          loooong wknd
+        </h1>
+      </header>
+
       <h2>Register</h2>
-      <form onSubmit={handleSubmit} style={{ textAlign: 'left', display: 'inline-block' }}>
-        <div style={{ marginBottom: '10px' }}>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)} // Update name state
-            required
-          />
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          textAlign: 'left',
+          display: 'inline-block',
+          maxWidth: '300px',
+          width: '100%',
+        }}
+      >
+        {/* Input fields */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <label style={{ marginBottom: '5px' }}>Name:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              style={{
+                padding: '8px',
+                fontSize: '16px',
+                borderRadius: '5px',
+                border: '1px solid #ccc',
+                width: '100%',
+              }}
+            />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <label style={{ marginBottom: '5px' }}>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={{
+                padding: '8px',
+                fontSize: '16px',
+                borderRadius: '5px',
+                border: '1px solid #ccc',
+                width: '100%',
+              }}
+            />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <label style={{ marginBottom: '5px' }}>Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              style={{
+                padding: '8px',
+                fontSize: '16px',
+                borderRadius: '5px',
+                border: '1px solid #ccc',
+                width: '100%',
+              }}
+            />
+          </div>
+
+          {/* Register button */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <button
+              type="submit"
+              style={{
+                padding: '10px',
+                fontSize: '16px',
+                borderRadius: '5px',
+                backgroundColor: '#6a5acd',
+                color: '#fff',
+                border: 'none',
+                cursor: 'pointer',
+                width: '150px',
+              }}
+            >
+              Register
+            </button>
+          </div>
         </div>
-        <div style={{ marginBottom: '10px' }}>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)} // Update email state
-            required
-          />
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} // Update password state
-            required
-          />
-        </div>
-        <button type="submit">Register</button>
       </form>
       <p>
-        Already have an account? <Link to="/">Sign In</Link>
+        Already have an account?{' '}
+        <Link to="/" style={{ textDecoration: 'none', color: '#6a5acd' }}>
+          Sign In
+        </Link>
       </p>
     </div>
   );

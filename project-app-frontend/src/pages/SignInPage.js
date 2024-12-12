@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import logo from '../logo.png';
+import '../App.css';
 
 function SignInPage() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -36,92 +38,47 @@ function SignInPage() {
       // Navigate to the home page after successful sign-in
       history.push('/home');
     } catch (error) {
-      console.error('Error during sign-in:', error);
       alert('Sign-in failed: ' + error.message);
     }
   };
 
-  //script to trigger delete request when button is clicked
-  const handleDeleteAccount = async () => {
-    if (!window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      return;
-    }
-  
-    try {
-      const response = await fetch('/api/users/delete', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password, // Include password for authentication
-        }),
-      });
-  
-      const result = await response.json();
-  
-      if (!response.ok) {
-        throw new Error(result?.message || 'Account deletion failed');
-      }
-  
-      // Clear user session data
-      localStorage.removeItem('userEmail');
-  
-      // Clear the form fields
-      setFormData({ email: '', password: '' });
-  
-      // Redirect to the sign-in page
-      alert('Account deleted successfully.');
-      history.push('/'); // Redirect to sign-in page (adjust route as needed)
-    } catch (error) {
-      console.error('Error during account deletion:', error);
-      alert('Account deletion failed: ' + error.message);
-    }
-  };
-   
-  
-  
-
   return (
-    <div style={{ textAlign: 'center' }}>
-      
-      <nav style={{ backgroundColor: '#333', padding: '10px', color: '#fff', height: '74px' }}></nav>
-
-
-
-
-
-
+    <div className="signin-page" style={{ textAlign: 'center' }}>
+      <header>
+        <h1>
+          <img src={logo} alt="Logo" className="logo" />
+          loooong wknd
+        </h1>
+      </header>
       <h2>Sign In</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'inline-block', textAlign: 'left' }}>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          style={{ display: 'block', marginBottom: '10px' }}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-          style={{ display: 'block', marginBottom: '10px' }}
-        />
-        <button type="submit">Sign In</button>
-        
-        <button type="button" onClick={handleDeleteAccount} style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white' }}>
-          Delete Account
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="input-group">
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit" className="button-primary">
+          Sign In
         </button>
       </form>
       <p>
         Don't have an account?{' '}
-        <Link to="/register" style={{ display: 'inline-block', textDecoration: 'none' }}>
+        <Link to="/register" className="link-primary">
           Register
         </Link>
       </p>

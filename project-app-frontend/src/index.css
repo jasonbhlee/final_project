@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color:rgb(101, 122, 214);
+  background-color:#58794d;
   color: white;
   font-size: 22px;
   align-items: center;
@@ -18,7 +18,7 @@ code {
 }
 
 button {
-  background-color: rgb(112, 89, 246);
+  background-color: #4ABFBD;
   border: none;
   padding: 10px;
   color: white;

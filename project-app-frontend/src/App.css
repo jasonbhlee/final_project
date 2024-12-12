@@ -36,3 +36,191 @@
     transform: rotate(360deg);
   }
 }
+
+/* Existing styles in app.css */
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #22a1a1  ;
+  padding: 10px;
+  height: 37px;
+  width: 100%;
+}
+
+/* Navigation Links */
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar li {
+  display: inline-block;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #000;
+}
+
+/* Background for SignInPage */
+.signin-page {
+  background-image: url('../public/wheat_field.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #000;
+}
+
+/* Background styling for homepage */
+.homepage {
+  background-image: url('../public/paperbag.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: center;
+  text-align: center;
+}
+
+/* Background styling for projects page */
+.projects-page {
+  background-image: url('../public/shredder.png'); /* Path to your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content at the top */
+  align-items: center;
+  text-align: center;
+}
+
+/* Background styling for register page */
+.register-page {
+  background-image: url('../public/cloud.jpeg'); /* Path to your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensures it covers the full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content at the top */
+  align-items: center;
+  text-align: center;
+}
+
+
+
+/* Logo */
+.logo {
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+/* Input group styling */
+.input-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 300px; /* Adjust as necessary */
+}
+
+.input-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-group input {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+/* Button styles */
+.button-primary {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #3e27c2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  width: 300px; /* Match input width */
+  margin-top: 10px;
+}
+
+.button-primary:hover {
+  background-color: #5a4ab5;
+}
+
+/* Link styles */
+.link-primary {
+  color: #6a5acd;
+  text-decoration: none;
+}
+
+.link-primary:hover {
+  text-decoration: underline;
+}
+
+
+
